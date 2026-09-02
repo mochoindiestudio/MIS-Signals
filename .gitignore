@@ -1,0 +1,20 @@
+# This repo is a UPM package, consumed by Unity projects — it is not itself a Unity project.
+# .meta files ARE tracked (UPM needs them). Only ignore incidental cruft.
+
+# If someone opens this folder as a Unity project by mistake:
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+*.csproj
+*.sln
+*.slnx
+*.user
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vs/
+.idea/

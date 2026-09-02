@@ -1,0 +1,18 @@
+{
+  "name": "com.mochoindiestudio.signals",
+  "version": "0.1.0",
+  "displayName": "MIS Signals",
+  "description": "A tiny, engine-light global signal channel shared by the MIS Dialog System, MIS Quest System and MIS Inventory System packages. One string-keyed Report / Subscribe bus (event id + optional payload + amount) so those packages can integrate through a game without referencing each other's assemblies. Runtime only, no UnityEngine dependency, no editor tooling.",
+  "unity": "6000.0",
+  "license": "MIT",
+  "keywords": [
+    "signals",
+    "events",
+    "messaging",
+    "event-bus",
+    "decoupling"
+  ],
+  "author": {
+    "name": "Mocho Indie Studio"
+  }
+}
