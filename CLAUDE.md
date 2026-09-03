@@ -3,24 +3,39 @@
 ## What this is
 
 `MIS Signals` (`com.mochoindiestudio.signals`) is a **standalone UPM package** — not a Unity project.
-`package.json` is at the repo root; the code is under `Runtime/`. It is the shared primitive behind
-three sibling packages: **MIS Dialog System**, **MIS Quest System**, **MIS Inventory System**. They
-integrate through a game by publishing/subscribing on this one channel instead of referencing each
-other's assemblies.
+`package.json` is at the repo root. It is the shared primitive behind three sibling packages:
+**MIS Dialog System**, **MIS Quest System**, **MIS Inventory System**. They integrate through a game
+by publishing/subscribing on this one channel instead of referencing each other's assemblies.
+Published at `https://github.com/mochoindiestudio/MIS-Signals` (public); all three consume it via
+`#vX.Y.Z` git URL.
 
-Built **Minimal** (v0.1.0, 2026-09-02):
+**Runtime core** (`Runtime/`, v0.1.0) — unchanged, asmdef `MochoIndieStudio.Signals`,
+**`noEngineReferences: true`** (no `UnityEngine`):
 - `MisSignals` — static, stateless: `Report(string eventId, string payload = null, int amount = 1)`,
   `Subscribe`/`Unsubscribe(ISignalListener)`, `Clear()`, `ListenerCount`. Snapshots its listener list
   per dispatch so a listener may (un)subscribe during `Report`.
 - `ISignalListener` — `OnSignal(string eventId, string payload, int amount)`.
-- Asmdef `MochoIndieStudio.Signals`, **`noEngineReferences: true`** — no `UnityEngine`, no editor code.
 
-## Deliberately out of scope (for now)
+**Authoring + Editor** (v0.2.0, 2026-09-03) — new assemblies; do **not** touch the runtime core:
+- `Authoring/` → `MochoIndieStudio.Signals.Authoring` (references UnityEngine): `SignalIdAttribute`
+  (`[SignalId]` on a `string` field — stays a plain string, drawer hook only),
+  `SignalIdProviderAttribute` (`[SignalIdProvider]` on a static class → its `public const string`
+  fields feed the picker), `SignalCatalog` (`ScriptableObject`, `{ Id, Description }` list).
+- `Editor/` → `MochoIndieStudio.Signals.Editor`: `SignalIdDrawer` (searchable `AdvancedDropdown`
+  picker; free text still allowed), `SignalIdRegistry` (merges provider consts + catalog entries,
+  deduped, lazy cache invalidated on domain reload / asset import).
+- Design + rationale: `docs/signals-v0.2-design.md`.
 
-No `EventId` / `Payload` value types, no shared authoring widget (`SignalTrigger`) or property
-drawer, no bus-per-domain wrappers. A "more general" version is planned **only after** Dialog +
-Quest + Inventory are all stable against this Minimal API — the user asked to be advised when that
-point is reached. Don't add surface area speculatively.
+## Still deliberately out of scope
+
+- **Shared `SignalSpec` serializable struct** (replacing `DialogEventTrigger` / `SignalCondition`
+  field pairs with one struct + drawer) — breaking asset migration for marginal gain; `[SignalId]`
+  already delivers id-validation with zero migration. Revisit only if a 4th consumer or a converged
+  payload shape appears.
+- **Typed payloads** (an `object context` param on `Report`, or an `EventId` value type) — no
+  consumer needs it; an additive change whenever one does.
+
+Don't add surface area speculatively. See `docs/signals-v0.2-design.md`.
 
 ## Working on this package
 

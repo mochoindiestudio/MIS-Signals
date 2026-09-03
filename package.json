@@ -1,8 +1,8 @@
 {
   "name": "com.mochoindiestudio.signals",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "MIS Signals",
-  "description": "A tiny, engine-light global signal channel shared by the MIS Dialog System, MIS Quest System and MIS Inventory System packages. One string-keyed Report / Subscribe bus (event id + optional payload + amount) so those packages can integrate through a game without referencing each other's assemblies. Runtime only, no UnityEngine dependency, no editor tooling.",
+  "description": "A tiny, engine-light global signal channel shared by the MIS Dialog System, MIS Quest System and MIS Inventory System packages. One string-keyed Report / Subscribe bus (event id + optional payload + amount) so those packages can integrate through a game without referencing each other's assemblies. The runtime core has no UnityEngine dependency; an optional Authoring assembly adds a [SignalId] attribute and a searchable id picker for editor fields.",
   "unity": "6000.0",
   "license": "MIT",
   "keywords": [

@@ -3,6 +3,28 @@
 All notable changes to this project are documented here. This project adheres to
 [Keep a Changelog](https://keepachangelog.com) and [Semantic Versioning](https://semver.org).
 
+## [0.2.0] - 2026-09-03
+
+### Added
+
+- **`MochoIndieStudio.Signals.Authoring`** assembly (new, references UnityEngine):
+  - `SignalIdAttribute` — `[SignalId]` on a `string` field draws it with a searchable picker of
+    project-known ids. The field stays a plain string, so adopting it needs no asset migration.
+  - `SignalIdProviderAttribute` — `[SignalIdProvider]` on a static class exposes its
+    `public const string` fields to the picker (zero-authoring id discovery).
+  - `SignalCatalog` — optional `ScriptableObject` listing `{ Id, Description }` entries
+    (`Create ▸ MIS Signals ▸ Signal Catalog`); a project may hold several, all merged.
+- **`MochoIndieStudio.Signals.Editor`** assembly (new): `SignalIdDrawer` (the picker) and
+  `SignalIdRegistry` (merges provider consts + catalog entries, deduped, rebuilt on domain reload
+  and asset import).
+- `docs/signals-v0.2-design.md` — the design, and the reasoning for holding the two deferred ideas
+  (a shared `SignalSpec` struct, typed payloads) until a concrete need appears.
+
+### Notes
+
+- The runtime core (`MisSignals`, `ISignalListener`, `noEngineReferences: true`) is unchanged — no
+  behaviour change, purely additive. A consumer that does not reference `…Authoring` is unaffected.
+
 ## [0.1.0] - 2026-09-02
 
 ### Added
