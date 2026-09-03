@@ -86,8 +86,8 @@ Each is a one- or two-line change, no asset migration:
 | MIS Quest System | `[SignalId]` on `SignalCondition.eventId`; Runtime asmdef → `…Authoring` | 0.5.0 |
 | MIS Dialog System | `[SignalId]` on `DialogEventTrigger.eventId`; Runtime asmdef → `…Authoring` | 0.7.0 |
 
-The Quest demo's `DemoSignals` can also take `[SignalIdProvider]` (Assembly-CSharp already auto-refs
-`…Authoring`).
+A provider class must hold signal ids **only** — every `public const string` on it is offered.
+The Quest demo's `DemoSignals` mixes ids with payload/item-id constants, so it stays un-annotated.
 
 ## Compatibility
 

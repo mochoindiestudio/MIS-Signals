@@ -7,6 +7,11 @@ namespace MochoIndieStudio.Signals.Authoring
     /// The <c>[SignalId]</c> picker lists every id it finds this way, so annotating an ids-holder
     /// such as <c>InventorySignalIds</c> once makes all of its ids discoverable with no
     /// <see cref="SignalCatalog"/> asset to maintain.
+    ///
+    /// <para>
+    /// <b>Every</b> <c>public const string</c> on the class is offered — keep a provider class to
+    /// signal ids only (don't mix in payload or other string constants).
+    /// </para>
     /// </summary>
     /// <example><code>
     /// [SignalIdProvider]
